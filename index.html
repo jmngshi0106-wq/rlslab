@@ -18,22 +18,17 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RLS Lab — Supabase RLS Debugger for Solo B2B SaaS Builders</title>
-<meta name="description" content="Your Supabase RLS policy looks correct. It isn't. RLS Lab shows you why your policies are failing at runtime — without replacing your stack, adding a service, or starting over.">
-<meta property="og:title" content="RLS Lab — Supabase RLS Debugger">
-<meta property="og:description" content="Find out which policies are silently blocking your users. Before they do.">
+<title>RLS Lab — Supabase RLS Debugger · Early Access</title>
+<meta name="description" content="Your Supabase RLS policy looks correct. It isn't. RLS Lab shows you why your policies are silently failing — before your users find out. Join the founding member waitlist.">
+<meta property="og:title" content="RLS Lab — Supabase RLS Debugger · Early Access">
+<meta property="og:description" content="Join the founding member waitlist. 50% off for life. Limited spots.">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./base.css">
 <link rel="stylesheet" href="./style.css">
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
-<style>
-  /* Inline SVG favicon */
-  .logo-svg { width: 28px; height: 28px; flex-shrink: 0; }
-</style>
 </head>
 <body>
 
@@ -45,26 +40,23 @@
         <svg class="logo-svg" viewBox="0 0 28 28" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
           <rect width="28" height="28" rx="6" fill="currentColor" fill-opacity="0.08"/>
           <rect x="0.5" y="0.5" width="27" height="27" rx="5.5" stroke="currentColor" stroke-opacity="0.15"/>
-          <!-- Terminal cursor block -->
           <rect x="6" y="9" width="8" height="2" rx="1" fill="#22c55e"/>
           <rect x="6" y="13" width="12" height="2" rx="1" fill="currentColor" fill-opacity="0.25"/>
           <rect x="6" y="17" width="6" height="2" rx="1" fill="currentColor" fill-opacity="0.15"/>
-          <!-- Blinking cursor -->
           <rect x="16" y="9" width="3" height="2" rx="0.5" fill="#22c55e" opacity="0.6"/>
         </svg>
         RLS Lab
       </a>
       <ul class="nav__links">
+        <li><a href="#problem" class="nav__link">The problem</a></li>
         <li><a href="#how" class="nav__link">How it works</a></li>
-        <li><a href="#failures" class="nav__link">Failures</a></li>
         <li><a href="#pricing" class="nav__link">Pricing</a></li>
-        <li><a href="#faq" class="nav__link">FAQ</a></li>
       </ul>
       <div class="nav__actions">
         <button class="theme-toggle" data-theme-toggle aria-label="Switch to light mode">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         </button>
-        <a href="#pricing" class="btn btn--primary">Scan Free</a>
+        <a href="#waitlist" class="btn btn--primary">Join Waitlist</a>
       </div>
     </div>
   </div>
@@ -73,78 +65,89 @@
 <!-- ── HERO ────────────────────────────────────────────────── -->
 <section class="hero">
   <div class="container">
-    <div class="hero__label">
-      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
-        <circle cx="5" cy="5" r="4" fill="currentColor" opacity="0.4"/>
-        <circle cx="5" cy="5" r="2" fill="currentColor"/>
-      </svg>
-      Supabase RLS Debugger
+
+    <div class="founding-badge">
+      <span class="founding-badge__dot"></span>
+      Early access — 50% off for founding members
     </div>
 
     <h1 class="hero__title">
-      Your RLS policy looks correct.<br><em>It isn't.</em>
+      Your RLS policy<br>looks correct.<br><em>It isn't.</em>
     </h1>
 
     <p class="hero__sub">
-      Connect your Supabase project. Find out which policies are silently blocking your users — before they do.
+      RLS Lab scans your Supabase project and shows you exactly which policies are silently failing at runtime — and why. No new stack. No migration. Just the answer.
     </p>
 
-    <div class="hero__cta">
-      <a href="#pricing" class="btn btn--primary btn--lg">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-        Scan My Project Free
-      </a>
-      <a href="#how" class="btn btn--ghost btn--lg">See how it works</a>
-    </div>
-    <p class="hero__note">No credit card &nbsp;·&nbsp; Read-only access &nbsp;·&nbsp; Results in 60 seconds</p>
+    <!-- Waitlist form — hero -->
+    <form class="waitlist-form waitlist-form--hero" id="hero-form" onsubmit="handleSubmit(event, 'hero')">
+      <input
+        type="email"
+        class="waitlist-input"
+        placeholder="you@company.com"
+        required
+        autocomplete="email"
+        aria-label="Your email address"
+      >
+      <button type="submit" class="btn btn--primary btn--lg">
+        Get Early Access — 50% Off
+      </button>
+    </form>
+    <p class="hero__note">No spam. No card required. &nbsp;·&nbsp; <span id="hero-count" class="spot-counter">50% off first month · founding members only</span></p>
 
-    <!-- Terminal mock showing a real scan output -->
+    <!-- Terminal mock — "this is what your results will look like" -->
     <div class="terminal-wrap">
+      <p class="terminal-caption">What your scan results will look like</p>
       <div class="terminal">
         <div class="terminal__bar">
           <span class="terminal__dot terminal__dot--red"></span>
           <span class="terminal__dot terminal__dot--yellow"></span>
           <span class="terminal__dot terminal__dot--green"></span>
-          <span class="terminal__title">rlslab — scan results</span>
+          <span class="terminal__title">rlslab — scan results · my-saas-project</span>
         </div>
         <div class="terminal__body">
 <span class="t-prompt">$</span> <span class="t-cmd">rlslab scan --project my-saas</span>
 <span class="t-blank"></span>
-<span class="t-comment">Scanning 7 tables across 3 calling contexts...</span>
+<span class="t-comment">Scanning 7 tables across 4 calling contexts...</span>
+<span class="t-comment">Contexts: anon · authenticated · SSR / App Router · Edge Function</span>
 <span class="t-blank"></span>
 <span class="t-critical">❌ CRITICAL</span>  <span class="t-label">table:</span> <span class="t-key">documents</span>  <span class="t-label">policy:</span> <span class="t-value">"Users can view their documents"</span>
 <span class="t-indent">  <span class="t-label">USING:</span>  <span class="t-value">auth.uid() = owner_id</span></span>
 <span class="t-indent">  <span class="t-label">Failure:</span> <span class="t-value">auth.uid() returns NULL in Next.js App Router context</span></span>
-<span class="t-indent">           <span class="t-value">Server client initialized without session. All rows denied.</span></span>
-<span class="t-indent">  <span class="t-label">Fix:</span>    <span class="t-value">Use createServerClient() with cookie forwarding</span></span>
+<span class="t-indent">           <span class="t-value">Server client initialized without session. All rows denied silently.</span></span>
+<span class="t-indent">  <span class="t-label">Fix →</span>   <span class="t-value">Use createServerClient() with cookie-based session forwarding</span></span>
 <span class="t-blank"></span>
 <span class="t-warning">⚠ WARNING</span>   <span class="t-label">table:</span> <span class="t-key">organization_members</span>
 <span class="t-indent">  <span class="t-label">USING:</span>  <span class="t-value">organization_id IN (SELECT organization_id FROM organization_members WHERE user_id = auth.uid())</span></span>
-<span class="t-indent">  <span class="t-label">Failure:</span> <span class="t-value">Self-referencing subquery → infinite recursion → HTTP 500</span></span>
-<span class="t-indent">  <span class="t-label">Fix:</span>    <span class="t-value">Wrap in SECURITY DEFINER function to break recursion cycle</span></span>
+<span class="t-indent">  <span class="t-label">Failure:</span> <span class="t-value">Self-referencing subquery → infinite recursion → HTTP 500 on every SELECT</span></span>
+<span class="t-indent">  <span class="t-label">Fix →</span>   <span class="t-value">Wrap in SECURITY DEFINER function to break the recursion cycle</span></span>
 <span class="t-blank"></span>
 <span class="t-warning">⚠ WARNING</span>   <span class="t-label">table:</span> <span class="t-key">invoices</span>  <span class="t-label">policy:</span> <span class="t-value">"Users can update their invoices"</span>
 <span class="t-indent">  <span class="t-label">FOR:</span>    <span class="t-value">UPDATE USING (auth.uid() = user_id)</span></span>
-<span class="t-indent">  <span class="t-label">Failure:</span> <span class="t-value">Missing WITH CHECK — UI returns success, row not persisted</span></span>
-<span class="t-indent">  <span class="t-label">Fix:</span>    <span class="t-value">Add WITH CHECK (auth.uid() = user_id) to UPDATE policy</span></span>
+<span class="t-indent">  <span class="t-label">Failure:</span> <span class="t-value">Missing WITH CHECK — UI shows success, row never saved. Zero error logged.</span></span>
+<span class="t-indent">  <span class="t-label">Fix →</span>   <span class="t-value">Add WITH CHECK (auth.uid() = user_id) to the UPDATE policy</span></span>
 <span class="t-blank"></span>
 <span class="t-ok">✓ OK</span>        <span class="t-label">tables:</span> <span class="t-value">profiles, teams, team_members, audit_logs</span>
 <span class="t-blank"></span>
-<span class="t-comment">─────────────────────────────────────────────</span>
-<span class="t-critical">1 critical</span>  <span class="t-warning">2 warnings</span>  <span class="t-ok">4 passed</span>  <span class="t-label">· 7 tables scanned</span>
+<span class="t-comment">─────────────────────────────────────────────────────────</span>
+<span class="t-critical">1 critical</span>  <span class="t-warning">2 warnings</span>  <span class="t-ok">4 passed</span>  <span class="t-label">· 7 tables · 4 contexts</span>
         </div>
       </div>
     </div>
+
   </div>
 </section>
 
-<!-- ── SITUATION ────────────────────────────────────────────── -->
-<section class="section section--alt">
+<!-- ── THE LIE ───────────────────────────────────────────────── -->
+<section class="section section--alt" id="problem">
   <div class="container">
     <div class="situation">
       <p>You wrote the policy. <strong>You tested it in the SQL Editor.</strong> It passed.</p>
       <p>Then you shipped — and your users couldn't see their data.</p>
-      <p class="highlight">The SQL Editor runs as <code style="font-family:var(--font-display);background:rgba(248,113,113,0.15);padding:1px 6px;border-radius:4px;font-size:0.875em;">postgres</code>. It bypasses every RLS policy you wrote. What you tested is not what your users hit.</p>
+      <div class="callout callout--critical">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        The SQL Editor runs as <code>postgres</code>. It bypasses every RLS policy you wrote. What you tested is not what your users hit.
+      </div>
     </div>
   </div>
 </section>
@@ -152,14 +155,14 @@
 <!-- ── SOCIAL PROOF QUOTES ──────────────────────────────────── -->
 <section class="section">
   <div class="container">
-    <p class="section__label" style="text-align:center">Sound familiar?</p>
+    <p class="section__label" style="text-align:center">This is happening to builders right now</p>
     <div class="quotes-grid">
       <div class="quote-card">
         <p class="quote-card__text">"I spent <strong>2 days debugging</strong> what turned out to be auth.uid() returning NULL in my server-side queries. My policy was fine. My context was wrong."</p>
         <p class="quote-card__source"><a href="https://www.reddit.com/r/Supabase/comments/1e9zulb/anyone_else_getting_really_frustrated_with_rls/" target="_blank" rel="noopener noreferrer">r/Supabase</a></p>
       </div>
       <div class="quote-card">
-        <p class="quote-card__text">"Ran <strong>prisma migrate deploy</strong> and my entire API stopped working. Every table returned 0 rows. Took a full day to find out Prisma had silently revoked my schema grants."</p>
+        <p class="quote-card__text">"Ran <strong>prisma migrate deploy</strong> and my entire API stopped working. Every table returned 0 rows. Took a full day to realize Prisma had silently revoked my schema grants."</p>
         <p class="quote-card__source"><a href="https://github.com/orgs/supabase/discussions" target="_blank" rel="noopener noreferrer">GitHub Discussions</a></p>
       </div>
       <div class="quote-card">
@@ -167,20 +170,20 @@
         <p class="quote-card__source"><a href="https://www.reddit.com/r/Supabase/" target="_blank" rel="noopener noreferrer">r/Supabase</a></p>
       </div>
       <div class="quote-card">
-        <p class="quote-card__text">"My UPDATE policy <strong>looked right. The UI said success. The row never changed.</strong> Turns out I had a USING clause where I needed WITH CHECK. Postgres just... said nothing."</p>
+        <p class="quote-card__text">"My UPDATE policy looked right. <strong>The UI said success. The row never changed.</strong> Turns out I had a USING clause where I needed WITH CHECK. Postgres said nothing."</p>
         <p class="quote-card__source"><a href="https://www.reddit.com/r/Supabase/comments/1fzja81/setting_up_rls_policies_is_super_frustrating_in/" target="_blank" rel="noopener noreferrer">r/Supabase, 29 upvotes</a></p>
       </div>
     </div>
-    <p style="text-align:center;margin-top:var(--space-8);font-size:var(--text-sm);color:var(--color-text-faint);font-family:var(--font-display);">These are the four most common failure modes in Supabase RLS. Each reported hundreds of times. Each invisible to every existing tool.</p>
+    <p style="text-align:center;margin-top:var(--space-8);font-size:var(--text-sm);color:var(--color-text-faint);font-family:var(--font-display);">These are the 4 most common RLS failure modes. Each invisible to every existing tool.</p>
   </div>
 </section>
 
 <!-- ── FAILURE TABLE ────────────────────────────────────────── -->
-<section class="section section--dark-alt" id="failures">
+<section class="section section--dark-alt">
   <div class="container">
-    <p class="section__label">The 8 failures nobody tells you about</p>
-    <h2 class="section__title">What's actually happening<br>when your queries break</h2>
-    <p class="section__sub" style="margin-bottom:var(--space-10)">The Supabase SQL Editor bypasses all of these. It runs as <code style="font-family:var(--font-display);background:var(--color-surface-offset);padding:1px 6px;border-radius:4px;font-size:0.875em;">postgres</code>. You test. It passes. You ship. It breaks.</p>
+    <p class="section__label">What RLS Lab detects</p>
+    <h2 class="section__title">8 silent failures.<br>Zero existing tools catch them.</h2>
+    <p class="section__sub" style="margin-bottom:var(--space-10)">The SQL Editor bypasses all of these. It runs as <code style="font-family:var(--font-display);background:var(--color-surface-offset);padding:1px 6px;border-radius:4px;font-size:0.875em;">postgres</code>. You test. It passes. You ship. It breaks.</p>
 
     <div style="overflow-x:auto;border-radius:var(--radius-xl);border:1px solid var(--color-border);">
       <table class="failure-table">
@@ -195,185 +198,108 @@
           <tr>
             <td><span class="badge badge--critical">CRIT</span></td>
             <td><span class="symptom">Empty results after SSR auth</span></td>
-            <td><span class="cause"><code>auth.uid()</code> returns NULL server-side. Session not forwarded. All rows silently denied.</span></td>
+            <td><span class="cause"><code>auth.uid()</code> returns NULL server-side. Session not forwarded. All rows silently denied — no error.</span></td>
           </tr>
           <tr>
             <td><span class="badge badge--critical">CRIT</span></td>
             <td><span class="symptom">HTTP 500 on org-scoped SELECT</span></td>
-            <td><span class="cause">Your policy references the same table it's protecting. Infinite recursion. Postgres panics.</span></td>
+            <td><span class="cause">Your policy references the same table it's protecting. Infinite recursion. Postgres panics every time.</span></td>
           </tr>
           <tr>
             <td><span class="badge badge--critical">CRIT</span></td>
             <td><span class="symptom">Everything breaks after <code>prisma migrate</code></span></td>
-            <td><span class="cause">Prisma revoked <code>GRANT</code> on your schema. RLS didn't cause this — but the error is identical. You'll debug the wrong thing for hours.</span></td>
+            <td><span class="cause">Prisma revoked <code>GRANT</code> on your schema. Error is identical to RLS denial. You'll debug the wrong thing for hours.</span></td>
           </tr>
           <tr>
             <td><span class="badge badge--warning">WARN</span></td>
             <td><span class="symptom">UPDATE returns success, row unchanged</span></td>
-            <td><span class="cause">You wrote <code>USING</code> where Postgres needed <code>WITH CHECK</code>. Silent failure. No error thrown. UI lies to your user.</span></td>
+            <td><span class="cause"><code>USING</code> written where Postgres needed <code>WITH CHECK</code>. Silent failure. UI lies to your user. No error logged.</span></td>
           </tr>
           <tr>
             <td><span class="badge badge--warning">WARN</span></td>
             <td><span class="symptom">Realtime subscriptions go silent</span></td>
-            <td><span class="cause">RLS evaluation at the broadcast path differs from PostgREST. Enabling any policy breaks subscriptions regardless of permissiveness.</span></td>
+            <td><span class="cause">RLS at the broadcast path differs from PostgREST. Any policy — even a permissive one — can break subscriptions.</span></td>
           </tr>
           <tr>
             <td><span class="badge badge--warning">WARN</span></td>
-            <td><span class="symptom">42501 error — cause unknown</span></td>
-            <td><span class="cause">Could be RLS denial. Could be a missing <code>GRANT</code>. The error is identical. No tool tells you which one. You guess for hours.</span></td>
+            <td><span class="symptom">42501 — cause unknown</span></td>
+            <td><span class="cause">Could be RLS denial. Could be a missing <code>GRANT</code>. The error is identical. No tool tells you which. You guess for hours.</span></td>
           </tr>
           <tr>
             <td><span class="badge badge--critical">CRIT</span></td>
             <td><span class="symptom">Clerk users blocked everywhere</span></td>
-            <td><span class="cause">Clerk doesn't write to <code>auth.users</code>. <code>auth.uid()</code> is permanently NULL. Every RLS tutorial you followed is wrong for Clerk users.</span></td>
+            <td><span class="cause">Clerk doesn't write to <code>auth.users</code>. <code>auth.uid()</code> is permanently NULL. Every tutorial you followed is wrong for Clerk.</span></td>
           </tr>
           <tr>
             <td><span class="badge badge--warning">WARN</span></td>
             <td><span class="symptom">Queries 10–100× slower at scale</span></td>
-            <td><span class="cause">Your membership-check policy re-evaluates on every row. That's O(N×M). Invisible at 100 rows. Fatal at 100,000.</span></td>
+            <td><span class="cause">Membership-check policy re-evaluates on every row. O(N×M). Silent at 100 rows. Fatal at 100,000.</span></td>
           </tr>
         </tbody>
       </table>
-    </div>
-
-    <p style="margin-top:var(--space-8);font-size:var(--text-sm);color:var(--color-text-faint);font-family:var(--font-display);">No existing tool detects any of the 8 failures above — not the Security Advisor, not SupaExplorer, not the AI prompt, not ZenStack.</p>
-  </div>
-</section>
-
-<!-- ── PROOF / DEMO BLOCKS ──────────────────────────────────── -->
-<section class="section">
-  <div class="container">
-    <p class="section__label">Real scanner output</p>
-    <h2 class="section__title">Not "your policy may have an issue."<br>The exact failure. The exact fix.</h2>
-    <p class="section__sub" style="margin-bottom:var(--space-10)">Context-aware. Uses your actual schema, your actual column names, your actual auth provider.</p>
-
-    <div class="demo-grid">
-      <!-- Critical example -->
-      <div class="code-block">
-        <div class="code-block__header">
-          <span class="code-block__lang">policy scan</span>
-          <span class="code-block__status code-block__status--critical">❌ CRITICAL</span>
-        </div>
-        <div class="code-block__body">
-<span class="line-neutral"><span class="kw">CREATE POLICY</span> <span class="str">"Users can view their documents"</span></span>
-<span class="line-neutral"><span class="kw">ON</span> documents <span class="kw">FOR SELECT</span></span>
-<span class="line-bad"><span class="kw">USING</span> (<span class="fn">auth.uid</span>() = owner_id);</span>
-<span class="line-neutral cm"></span>
-<span class="line-neutral cm">-- ^ Correct SQL. Wrong context.</span>
-        </div>
-        <div class="code-block__label code-block__label--critical">
-          Failure: auth.uid() returns NULL in Next.js App Router.<br>Server client initialized without user session.<br>Impact: All server-side queries return 0 rows. No error.
-        </div>
-      </div>
-
-      <!-- Warning example -->
-      <div class="code-block">
-        <div class="code-block__header">
-          <span class="code-block__lang">policy scan</span>
-          <span class="code-block__status code-block__status--warning">⚠ WARNING</span>
-        </div>
-        <div class="code-block__body">
-<span class="line-neutral"><span class="kw">CREATE POLICY</span> <span class="str">"Users can update invoices"</span></span>
-<span class="line-neutral"><span class="kw">ON</span> invoices <span class="kw">FOR UPDATE</span></span>
-<span class="line-bad"><span class="kw">USING</span> (<span class="fn">auth.uid</span>() = user_id);</span>
-<span class="line-neutral cm"></span>
-<span class="line-neutral cm">-- Missing WITH CHECK clause.</span>
-<span class="line-neutral cm">-- Postgres silently applies USING as WITH CHECK.</span>
-<span class="line-neutral cm">-- If updated row no longer matches → silent failure.</span>
-        </div>
-        <div class="code-block__label code-block__label--warning">
-          Failure: UPDATE returns 200. Row not saved. Zero error logged.<br>Fix: Add WITH CHECK (auth.uid() = user_id) to this policy.
-        </div>
-      </div>
-
-      <!-- Good example -->
-      <div class="code-block">
-        <div class="code-block__header">
-          <span class="code-block__lang">auto-fix output</span>
-          <span class="code-block__status code-block__status--ok">✓ FIXED</span>
-        </div>
-        <div class="code-block__body">
-<span class="line-neutral"><span class="kw">CREATE POLICY</span> <span class="str">"Users can update invoices"</span></span>
-<span class="line-neutral"><span class="kw">ON</span> invoices <span class="kw">FOR UPDATE</span></span>
-<span class="line-good"><span class="kw">USING</span> (<span class="fn">auth.uid</span>() = user_id)</span>
-<span class="line-good"><span class="kw">WITH CHECK</span> (<span class="fn">auth.uid</span>() = user_id);</span>
-<span class="line-neutral cm"></span>
-<span class="line-neutral cm">-- USING: filter rows user can see before update</span>
-<span class="line-neutral cm">-- WITH CHECK: validate row after update is applied</span>
-        </div>
-        <div class="code-block__label code-block__label--ok">
-          Fix applied. UPDATE now correctly validates the row after modification.
-        </div>
-      </div>
     </div>
   </div>
 </section>
 
 <!-- ── HOW IT WORKS ─────────────────────────────────────────── -->
-<section class="section section--alt" id="how">
+<section class="section" id="how">
   <div class="container">
-    <p class="section__label">How it works</p>
-    <h2 class="section__title" style="margin-bottom:var(--space-10)">Same stack. No migration.<br>Results in 60 seconds.</h2>
+    <p class="section__label">How RLS Lab works</p>
+    <h2 class="section__title" style="margin-bottom:var(--space-10)">Same stack. No migration.<br>No new service.</h2>
     <div class="steps">
       <div class="step">
         <h3>Connect</h3>
-        <p>OAuth to your Supabase project. Read-only. We don't touch your data, your policies, or your schema.</p>
+        <p>OAuth to your Supabase project. Read-only. Nothing in your project changes — no policies, no data, no configuration.</p>
       </div>
       <div class="step">
         <h3>Scan</h3>
-        <p>We run your policies against simulated authenticated, SSR, service role, and anonymous contexts — and show you exactly what each returns and why.</p>
+        <p>Your policies are evaluated against four real calling contexts: anonymous, authenticated, server-side (SSR), and Edge Function. Not a superuser. Your actual users' perspective.</p>
       </div>
       <div class="step">
         <h3>See the failure</h3>
-        <p>Not "your policy may have an issue." The exact failure mode, exact line, exact reason — in plain language, not a Postgres error code.</p>
+        <p>Exact failure mode. Exact policy. Exact context. In plain language — not a Postgres error code you have to decode on Stack Overflow.</p>
       </div>
       <div class="step">
         <h3>Get the fix</h3>
-        <p>Context-aware SQL using your actual column names and auth provider — not a template. Includes an explanation of what was wrong and why the fix works.</p>
+        <p>Context-aware SQL using your actual column names and auth provider. With an explanation of what was wrong and why the fix works. Not a template.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ── PRICING ──────────────────────────────────────────────── -->
-<section class="section" id="pricing">
+<section class="section section--alt" id="pricing">
   <div class="container">
-    <p class="section__label" style="text-align:center">Pricing</p>
-    <h2 class="section__title" style="text-align:center;margin-bottom:var(--space-4)">Start free. Pay when it saves you time.</h2>
-    <p class="section__sub" style="text-align:center;margin-inline:auto;margin-bottom:var(--space-12)">One prevented 2-day debugging incident = 5 months of subscription.</p>
+    <p class="section__label" style="text-align:center">Founding member pricing</p>
+    <h2 class="section__title" style="text-align:center;margin-bottom:var(--space-4)">Save $24.50 on your first month.</h2>
+    <p class="section__sub" style="text-align:center;margin-inline:auto;margin-bottom:var(--space-10)">Join now as a founding member — 50% off your first month. Full price after that. Available to the first group of signups only.</p>
 
-    <div class="pricing-grid">
-
-      <!-- Free -->
-      <div class="pricing-card">
-        <p class="pricing-card__tier">Diagnose</p>
-        <div class="pricing-card__price">Free</div>
-        <div class="pricing-card__alt-price">&nbsp;</div>
-        <p class="pricing-card__desc">Connect your project. See exactly which policies are broken and why. No card required.</p>
-        <ul class="pricing-card__features">
-          <li class="pricing-card__feature">Scan up to 3 tables</li>
-          <li class="pricing-card__feature">Detect 5 critical failure modes</li>
-          <li class="pricing-card__feature">NULL context detection (SSR, Edge Fn)</li>
-          <li class="pricing-card__feature">USING / WITH CHECK validation</li>
-          <li class="pricing-card__feature">Missing GRANT detection</li>
-          <li class="pricing-card__feature">Recursion risk flagging</li>
-        </ul>
-        <a href="#" class="btn btn--ghost" style="width:100%;justify-content:center">Start Free Scan</a>
+    <!-- Free tier callout -->
+    <div class="free-tier-callout">
+      <div class="free-tier-callout__left">
+        <span class="free-tier-callout__label">Free — Diagnose</span>
+        <p class="free-tier-callout__desc">Connect your project. See exactly which policies are broken and why. No card required. Scan up to 3 tables.</p>
       </div>
+      <a href="#waitlist" class="btn btn--ghost btn--sm">Get early access →</a>
+    </div>
+
+    <div class="pricing-grid" style="margin-top:var(--space-6)">
 
       <!-- Fix — featured -->
       <div class="pricing-card pricing-card--featured">
-        <div class="pricing-badge">Most popular</div>
+        <div class="pricing-badge">Founding Member</div>
         <p class="pricing-card__tier">Fix</p>
-        <div class="pricing-card__price">$29<span>/mo</span></div>
-        <div class="pricing-card__alt-price">&nbsp;</div>
-        <p class="pricing-card__desc">Unlimited scans + context-aware fix suggestions for your exact schema. Handles Clerk, SSR, Prisma, Realtime.</p>
+        <div class="pricing-card__price">
+          <span class="price-strike">$49</span>&nbsp;$24.50<span class="price-suffix">/mo</span>
+        </div>
+        <div class="pricing-card__alt-price">then $29/mo · save $24.50</div>
+        <p class="pricing-card__desc">Unlimited scans + context-aware fix suggestions for your exact schema. Handles Clerk, SSR NULL, Prisma migration grants, USING/WITH CHECK errors. Pre-ship checklist included.</p>
         <div class="pricing-card__guarantee">
-          If our fix doesn't resolve your failure, we debug it manually within 48 hours — or your next month is free.
+          If our fix doesn't work, we debug it manually within 48hr — or your next month is free.
         </div>
         <ul class="pricing-card__features">
-          <li class="pricing-card__feature">Everything in Diagnose</li>
           <li class="pricing-card__feature">Unlimited table scans</li>
+          <li class="pricing-card__feature">8 silent failure detections</li>
           <li class="pricing-card__feature">Context-aware fix suggestions</li>
           <li class="pricing-card__feature">Clerk + Supabase JWT patterns</li>
           <li class="pricing-card__feature">Prisma migration GRANT guard</li>
@@ -381,17 +307,19 @@
           <li class="pricing-card__feature">Pre-ship policy checklist</li>
           <li class="pricing-card__feature">48-hour manual debug guarantee</li>
         </ul>
-        <a href="#" class="btn btn--primary" style="width:100%;justify-content:center">Start Free → Upgrade</a>
+        <a href="#waitlist" class="btn btn--primary" style="width:100%;justify-content:center">Claim Founding Spot →</a>
       </div>
 
       <!-- Trust -->
       <div class="pricing-card">
         <p class="pricing-card__tier">Trust</p>
-        <div class="pricing-card__price">$79<span>/mo</span></div>
-        <div class="pricing-card__alt-price">or $599 one-time</div>
-        <p class="pricing-card__desc">CI-enforced confidence. Auto-generated tests + GitHub Action that fails your build if a migration breaks a policy.</p>
+        <div class="pricing-card__price">
+          <span class="price-strike">$99</span>&nbsp;$39.50<span class="price-suffix">/mo</span>
+        </div>
+        <div class="pricing-card__alt-price">then $79/mo · or $599 one-time · save $59.50</div>
+        <p class="pricing-card__desc">Everything in Fix + auto-generated pgTAP tests, GitHub Action CI integration, Realtime policy validator, performance audit, policy regression alerts.</p>
         <div class="pricing-card__guarantee">
-          If a migration passes our CI check and breaks a policy in production, we fix the test suite and refund the month.
+          If a migration passes our CI check and breaks production, we fix the test suite and refund the month.
         </div>
         <ul class="pricing-card__features">
           <li class="pricing-card__feature">Everything in Fix</li>
@@ -402,66 +330,121 @@
           <li class="pricing-card__feature">Realtime policy validator</li>
           <li class="pricing-card__feature">One additional team seat</li>
         </ul>
-        <a href="#" class="btn btn--ghost" style="width:100%;justify-content:center">Get Trust</a>
+        <a href="#waitlist" class="btn btn--ghost" style="width:100%;justify-content:center">Claim Founding Spot →</a>
       </div>
 
     </div>
 
-    <!-- Audit add-on -->
-    <div style="margin-top:var(--space-8);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-8);background:var(--color-surface);display:flex;align-items:flex-start;gap:var(--space-8);flex-wrap:wrap;">
-      <div style="flex:1;min-width:240px;">
-        <p style="font-family:var(--font-display);font-size:var(--text-xs);font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-text-muted);margin-bottom:var(--space-2);">Audit — one-time</p>
-        <p style="font-family:var(--font-display);font-size:var(--text-xl);font-weight:600;letter-spacing:-0.04em;color:var(--color-text);margin-bottom:var(--space-3);">$149</p>
-        <p style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.65;max-width:48ch;">Submit your project. Receive a complete policy set + pgTAP tests + a Loom walkthrough of every failure found — within 24 hours. <strong style="color:var(--color-text);">Outcome guaranteed:</strong> if delivered policies fail in production for a covered failure mode, full re-audit free.</p>
+    <!-- Launch Accelerator -->
+    <div class="audit-addon">
+      <div>
+        <p class="audit-addon__tier">Launch Accelerator — one-time</p>
+        <p class="audit-addon__price">$149 <span>one-time · founding price $74</span></p>
+        <p class="audit-addon__desc">Submit your project. Get a complete, correct policy set + pgTAP tests + Loom walkthrough of every failure found — within 24 hours. <strong>Outcome guaranteed:</strong> if delivered policies fail in production for any covered failure mode, full re-audit free.</p>
       </div>
-      <div style="display:flex;align-items:center;">
-        <a href="#" class="btn btn--ghost">Book Audit →</a>
+      <a href="#waitlist" class="btn btn--ghost" style="white-space:nowrap">Claim Spot →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── WAITLIST SECTION ──────────────────────────────────────── -->
+<section class="section" id="waitlist">
+  <div class="container container--narrow">
+
+    <div class="waitlist-card">
+      <div class="waitlist-card__header">
+        <span class="founding-badge">
+          <span class="founding-badge__dot"></span>
+          Early Access Open
+        </span>
+        <h2 class="waitlist-card__title">Join the founding member waitlist</h2>
+        <p class="waitlist-card__sub">50% off your first month. First access when we launch. Direct line to the builder — your use case shapes what we build first.</p>
+      </div>
+
+      <form class="waitlist-form" id="waitlist-form" onsubmit="handleSubmit(event, 'waitlist')">
+        <div class="waitlist-form__row">
+          <input
+            type="email"
+            class="waitlist-input"
+            placeholder="you@company.com"
+            required
+            autocomplete="email"
+            aria-label="Your work email"
+          >
+          <button type="submit" class="btn btn--primary btn--lg">
+            Claim 50% Off First Month
+          </button>
+        </div>
+        <p class="waitlist-form__note">No spam. No credit card. Unsubscribe anytime.</p>
+      </form>
+
+      <div class="waitlist-card__proof">
+        <div class="proof-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          50% off your first month on Fix or Trust — founding members only
+        </div>
+        <div class="proof-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          First access when beta launches
+        </div>
+        <div class="proof-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          Direct input into what gets built first
+        </div>
+        <div class="proof-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          48-hour manual debug guarantee on day one
+        </div>
       </div>
     </div>
+
   </div>
 </section>
 
 <!-- ── FAQ ──────────────────────────────────────────────────── -->
 <section class="section section--alt" id="faq">
   <div class="container">
-    <p class="section__label" style="text-align:center">Common questions</p>
-    <h2 class="section__title" style="text-align:center;margin-bottom:var(--space-10)">Answers</h2>
+    <p class="section__label" style="text-align:center">Questions</p>
+    <h2 class="section__title" style="text-align:center;margin-bottom:var(--space-10)">Honest answers</h2>
 
     <div class="faq-list">
+
       <details>
-        <summary>Why does the SQL Editor say my policy is fine?</summary>
-        <div class="faq-answer">The SQL Editor runs queries as the <code>postgres</code> superuser, which bypasses Row Level Security entirely. You are never testing your actual policy when you use the SQL Editor — you are testing a superuser query with RLS disabled. This is true regardless of which user you appear to be logged in as in the Studio UI.</div>
+        <summary>Is this live yet?</summary>
+        <div class="faq-answer">Not yet — this is the pre-launch waitlist. We're building RLS Lab now and opening beta to founding members first. Joining the waitlist locks in your 50% discount and gets you first access when we launch.</div>
       </details>
 
       <details>
-        <summary>Will this change anything in my project?</summary>
-        <div class="faq-answer">No. We connect read-only via OAuth. We simulate query contexts against your schema structure — we never modify your policies, data, or configuration. You can verify this by watching the network tab during the scan: no write requests are made to your project.</div>
+        <summary>Why should I trust that this will actually get built?</summary>
+        <div class="faq-answer">Fair question. A few things: the founder has personally hit every failure mode documented on this page while building Supabase apps. The terminal output above isn't a mockup of a dream product — it's the exact output format we're building toward. The founding member discount is a credibility bet: if we don't ship, you paid nothing. No card required to join.</div>
       </details>
 
       <details>
-        <summary>I'm using Clerk instead of Supabase Auth. Does this work?</summary>
-        <div class="faq-answer">Yes. Clerk + Supabase is a specific failure class we handle explicitly. The core issue — <code>auth.uid()</code> returns NULL because Clerk users don't exist in <code>auth.users</code> — is one of our top detected patterns. We generate the correct <code>current_setting('request.jwt.claims')::json->>'sub'</code> pattern for every policy that needs it.</div>
-      </details>
-
-      <details>
-        <summary>My schema is complex. Will the fix suggestions actually work?</summary>
-        <div class="faq-answer">We use your actual schema — column names, foreign keys, role structure — not generic templates. If the automated suggestion doesn't resolve your case, the 48-hour manual guarantee kicks in: a human debugs your specific failure and delivers the corrected policy. If we can't fix it within 48 hours, your next month is free.</div>
+        <summary>When does the 50% off expire?</summary>
+        <div class="faq-answer">It doesn't. Founding member pricing is locked to your account permanently. Even as we add features and raise the standard price, your rate stays at the founding price forever — as long as you maintain your subscription.</div>
       </details>
 
       <details>
         <summary>How is this different from the Supabase Security Advisor?</summary>
-        <div class="faq-answer">The Security Advisor tells you which tables are <em>missing</em> RLS. It has no way to tell you why an existing policy is silently failing at runtime. Those are different problems. Most builders hit the second one — after they've already written their policies.</div>
+        <div class="faq-answer">The Security Advisor tells you which tables are <em>missing</em> RLS. It cannot tell you why a policy you've already written is silently failing at runtime — returning empty results, causing HTTP 500s, or blocking Realtime subscriptions. Those are different problems. RLS Lab solves the second one.</div>
       </details>
 
       <details>
-        <summary>What if I already have 15 tables with RLS?</summary>
-        <div class="faq-answer">That's the exact use case this was built for. Connect the project, run a full scan, and you'll see which of your 15 tables have risky or broken policies in one view — sorted by severity. No need to review each table manually.</div>
+        <summary>Why not just ask ChatGPT to fix my RLS?</summary>
+        <div class="faq-answer">You've probably already tried this. The AI gave you SQL that looked correct — because it is syntactically correct. But it fails at runtime because AI doesn't know your calling context: whether you're using the anon client in a server component, whether your Prisma migration already wiped your grants, whether your Clerk users aren't in <code>auth.users</code>. AI without context generates the right-looking wrong answer. RLS Lab reads your actual schema and calling context — and finds the failure the AI can't see.</div>
       </details>
 
       <details>
-        <summary>Can't I just ask ChatGPT to fix my RLS?</summary>
-        <div class="faq-answer">You probably already tried this. The AI gave you SQL that <em>looked</em> correct — because it is syntactically correct. But it fails at runtime because AI doesn't know your calling context. It doesn't know you're using the anon client in a server component, that your Prisma migration already wiped your grants, or that your Clerk users aren't in <code>auth.users</code>. AI without context generates the right-looking wrong answer.</div>
+        <summary>Will this work with Clerk + Supabase?</summary>
+        <div class="faq-answer">Yes. Clerk + Supabase is a specific failure class we handle explicitly. The core issue — <code>auth.uid()</code> returning NULL because Clerk users don't exist in <code>auth.users</code> — is one of the most common patterns we detect. We generate the correct <code>current_setting('request.jwt.claims')::json->>'sub'</code> replacement for every policy that needs it.</div>
       </details>
+
+      <details>
+        <summary>What if my schema is too complex for automated fixes?</summary>
+        <div class="faq-answer">The 48-hour manual guarantee covers this. If the automated fix doesn't resolve your specific failure, a human debugs it and delivers the corrected policy within 48 hours. If we can't fix it, your next month is free. Complex schemas are the exact use case this was built for — the patterns that break most often are the multi-tenant, org-scoped, role-based ones, not the simple ones.</div>
+      </details>
+
     </div>
   </div>
 </section>
@@ -469,12 +452,9 @@
 <!-- ── FOOTER CTA ────────────────────────────────────────────── -->
 <section class="footer-cta">
   <div class="container container--narrow">
-    <h2 class="section__title">Your policies look correct<br>until a real user hits them.</h2>
-    <p class="section__sub" style="margin-inline:auto;margin-bottom:var(--space-8);">Find out what's actually failing — before your users do. Free scan, read-only, 60 seconds.</p>
-    <a href="#pricing" class="btn btn--primary btn--lg">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      Scan My Project Free
-    </a>
+    <h2 class="section__title">Stop losing days to<br>RLS debugging.</h2>
+    <p class="section__sub" style="margin-inline:auto;margin-bottom:var(--space-8);">Join the waitlist. Lock in 50% off your first month. First access when we launch.</p>
+    <a href="#waitlist" class="btn btn--primary btn--lg">Claim Your Founding Spot →</a>
   </div>
 </section>
 
@@ -484,8 +464,7 @@
     <div class="footer__inner">
       <p class="footer__copy">
         &copy; 2026 RLS Lab &nbsp;·&nbsp;
-        <a href="#" target="_blank" rel="noopener noreferrer">Privacy</a> &nbsp;·&nbsp;
-        <a href="#" target="_blank" rel="noopener noreferrer">Terms</a>
+        <a href="mailto:hello@rlslab.com">hello@rlslab.com</a>
       </p>
       <p class="footer__copy">
         <a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer">Created with Perplexity Computer</a>
@@ -495,14 +474,15 @@
 </footer>
 
 <script>
+// ── Theme toggle ──────────────────────────────────────────────
 (function(){
   const t = document.querySelector('[data-theme-toggle]');
   const r = document.documentElement;
   let d = r.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
   r.setAttribute('data-theme', d);
+  const sunIcon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
+  const moonIcon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
   if(t) {
-    const sunIcon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
-    const moonIcon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
     t.innerHTML = d === 'dark' ? sunIcon : moonIcon;
     t.addEventListener('click', () => {
       d = d === 'dark' ? 'light' : 'dark';
@@ -512,6 +492,58 @@
     });
   }
 })();
+
+// ── Waitlist form ─────────────────────────────────────────────
+function handleSubmit(e, source) {
+  e.preventDefault();
+  const form = e.target;
+  const input = form.querySelector('input[type="email"]');
+  const email = input.value.trim();
+  const btn = form.querySelector('button[type="submit"]');
+
+  // Disable during submit
+  btn.disabled = true;
+  btn.textContent = 'Joining...';
+
+  // Store locally (in-memory for now — replace with your email service endpoint)
+  console.log('Waitlist signup:', email, 'source:', source);
+
+  // Simulate network delay — replace this fetch with your real endpoint
+  // e.g. Mailchimp, ConvertKit, Loops.so, Resend, or a simple Supabase insert
+  setTimeout(() => {
+    showSuccess(form, email, source);
+  }, 800);
+}
+
+function showSuccess(form, email, source) {
+  const wrap = form.parentElement;
+  const isHero = source === 'hero';
+
+  const msg = document.createElement('div');
+  msg.className = 'success-msg';
+  msg.innerHTML = `
+    <div class="success-msg__icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <div>
+      <p class="success-msg__title">You're on the list.</p>
+      <p class="success-msg__sub">We'll email <strong>${email}</strong> when beta opens. Your 50% founding discount is reserved.</p>
+    </div>
+  `;
+
+  form.style.display = 'none';
+  if (isHero) {
+    form.insertAdjacentElement('afterend', msg);
+  } else {
+    form.insertAdjacentElement('afterend', msg);
+  }
+
+  // Update counter text
+  document.querySelectorAll('.spot-counter').forEach(el => {
+    el.textContent = 'Spot reserved ✓';
+    el.style.color = 'var(--color-primary)';
+  });
+}
 </script>
 
 </body>

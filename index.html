@@ -395,30 +395,11 @@
     }
   })();
   
-  // ── Waitlist form ─────────────────────────────────────────────
   const WAITLIST_ENDPOINT = "http://127.0.0.1:54321/functions/v1/waitlist-signup";
   
-  function successMessage(email) {
-    return `
-      <div class="success-msg__icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <polyline points="20 6 9 17 4 12"></polyline>
-        </svg>
-      </div>
-      <div>
-        <p class="success-msg__title">You're on the list.</p>
-        <p class="success-msg__sub">We'll email <strong>${email}</strong> when beta opens.</p>
-      </div>
-    `;
-  }
-  
-  function errorMessage(message) {
-    return `
-      <div>
-        <p class="success-msg__title">Signup failed.</p>
-        <p class="success-msg__sub">${message}</p>
-      </div>
-    `;
+  function setButtonState(btn, disabled, text) {
+    btn.disabled = disabled;
+    btn.textContent = text;
   }
   
   async function handleSubmit(e, source) {
@@ -429,51 +410,72 @@
     const btn = form.querySelector('button[type="submit"]');
     const email = input.value.trim();
   
-    btn.disabled = true;
-    const originalText = btn.textContent;
-    btn.textContent = 'Joining...';
-  
-    let existingMsg = form.parentElement.querySelector('.success-msg');
-    if (existingMsg) existingMsg.remove();
+    setButtonState(btn, true, 'Joining...');
   
     try {
       const res = await fetch(WAITLIST_ENDPOINT, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           email,
-          source
-        })
+          source,
+        }),
       });
   
-      const data = await res.json();
+      const data = await res.json().catch(() => ({}));
   
       if (!res.ok) {
-        throw new Error(data.error || 'Request failed');
+        throw new Error(data.error || 'Signup failed');
       }
   
-      const msg = document.createElement('div');
-      msg.className = 'success-msg';
-      msg.innerHTML = successMessage(email);
-  
-      form.style.display = 'none';
-      form.insertAdjacentElement('afterend', msg);
-  
-      document.querySelectorAll('.spot-counter').forEach((el) => {
-        el.textContent = 'Spot reserved ✓';
-        el.style.color = 'var(--color-primary)';
-      });
+      showSuccess(form, email);
     } catch (err) {
-      const msg = document.createElement('div');
-      msg.className = 'success-msg';
-      msg.innerHTML = errorMessage(err instanceof Error ? err.message : 'Unexpected error');
-  
-      form.insertAdjacentElement('afterend', msg);
-      btn.disabled = false;
-      btn.textContent = originalText;
+      const message = err instanceof Error ? err.message : 'Load failed';
+      showError(form, message);
+      setButtonState(btn, false, 'Join the Beta Waitlist');
     }
+  }
+  
+  function showSuccess(form, email) {
+    const existingError = form.parentElement.querySelector('.error-msg');
+    if (existingError) existingError.remove();
+  
+    const msg = document.createElement('div');
+    msg.className = 'success-msg';
+    msg.innerHTML = `
+      <div class="success-msg__icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+      </div>
+      <div>
+        <p class="success-msg__title">You're on the list.</p>
+        <p class="success-msg__sub">We'll email <strong>${email}</strong> when beta opens.</p>
+      </div>
+    `;
+  
+    form.style.display = 'none';
+    form.insertAdjacentElement('afterend', msg);
+  
+    document.querySelectorAll('.spot-counter').forEach(el => {
+      el.textContent = 'Spot reserved ✓';
+      el.style.color = 'var(--color-primary)';
+    });
+  }
+  
+  function showError(form, message) {
+    const existingError = form.parentElement.querySelector('.error-msg');
+    if (existingError) existingError.remove();
+  
+    const msg = document.createElement('p');
+    msg.className = 'error-msg';
+    msg.textContent = message;
+    msg.style.marginTop = '12px';
+    msg.style.color = '#f87171';
+  
+    form.insertAdjacentElement('afterend', msg);
   }
   </script>
 

@@ -10,6 +10,8 @@ create unique index if not exists waitlist_signups_email_key
 
 alter table public.waitlist_signups enable row level security;
 
+drop policy if exists "deny_all_waitlist_signups" on public.waitlist_signups;
+
 create policy "deny_all_waitlist_signups"
 on public.waitlist_signups
 for all

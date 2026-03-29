@@ -376,14 +376,20 @@
 </footer>
 
 <script>
-  // ── Theme toggle ──────────────────────────────────────────────
-  (function(){
+  (function () {
     const t = document.querySelector('[data-theme-toggle]');
     const r = document.documentElement;
-    let d = r.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+    let d =
+      r.getAttribute('data-theme') ||
+      (matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+
     r.setAttribute('data-theme', d);
-    const sunIcon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
-    const moonIcon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+
+    const sunIcon =
+      '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
+    const moonIcon =
+      '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+
     if (t) {
       t.innerHTML = d === 'dark' ? sunIcon : moonIcon;
       t.addEventListener('click', () => {
@@ -394,42 +400,42 @@
       });
     }
   })();
-  
-  const WAITLIST_ENDPOINT = "http://127.0.0.1:54321/functions/v1/waitlist-signup";
-  
+
+  const WAITLIST_ENDPOINT = "https://fjmylappfrlkhnjkvjka.supabase.co/functions/v1/waitlist-signup";
+  const SUPABASE_PUBLIC_KEY = "PASTE_YOUR_PUBLISHABLE_KEY_OR_LEGACY_ANON_KEY_HERE";
+
   function setButtonState(btn, disabled, text) {
     btn.disabled = disabled;
     btn.textContent = text;
   }
-  
+
   async function handleSubmit(e, source) {
     e.preventDefault();
-  
+
     const form = e.target;
     const input = form.querySelector('input[type="email"]');
     const btn = form.querySelector('button[type="submit"]');
     const email = input.value.trim();
-  
+
     setButtonState(btn, true, 'Joining...');
-  
+
     try {
       const res = await fetch(WAITLIST_ENDPOINT, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'apikey': SUPABASE_PUBLIC_KEY,
+          'Authorization': `Bearer ${SUPABASE_PUBLIC_KEY}`
         },
-        body: JSON.stringify({
-          email,
-          source,
-        }),
+        body: JSON.stringify({ email, source })
       });
-  
+
       const data = await res.json().catch(() => ({}));
-  
+
       if (!res.ok) {
         throw new Error(data.error || 'Signup failed');
       }
-  
+
       showSuccess(form, email);
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Load failed';
@@ -437,11 +443,11 @@
       setButtonState(btn, false, 'Join the Beta Waitlist');
     }
   }
-  
+
   function showSuccess(form, email) {
     const existingError = form.parentElement.querySelector('.error-msg');
     if (existingError) existingError.remove();
-  
+
     const msg = document.createElement('div');
     msg.className = 'success-msg';
     msg.innerHTML = `
@@ -455,29 +461,29 @@
         <p class="success-msg__sub">We'll email <strong>${email}</strong> when beta opens.</p>
       </div>
     `;
-  
+
     form.style.display = 'none';
     form.insertAdjacentElement('afterend', msg);
-  
-    document.querySelectorAll('.spot-counter').forEach(el => {
+
+    document.querySelectorAll('.spot-counter').forEach((el) => {
       el.textContent = 'Spot reserved ✓';
       el.style.color = 'var(--color-primary)';
     });
   }
-  
+
   function showError(form, message) {
     const existingError = form.parentElement.querySelector('.error-msg');
     if (existingError) existingError.remove();
-  
+
     const msg = document.createElement('p');
     msg.className = 'error-msg';
     msg.textContent = message;
     msg.style.marginTop = '12px';
     msg.style.color = '#f87171';
-  
+
     form.insertAdjacentElement('afterend', msg);
   }
-  </script>
+</script>
 
 </body>
 </html>

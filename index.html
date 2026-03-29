@@ -1,34 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-<!--
-   ______                            __
-  / ____/___  ____ ___  ____  __  __/ /____  _____
- / /   / __ \/ __ `__ \/ __ \/ / / / __/ _ \/ ___/
-/ /___/ /_/ / / / / / / /_/ / /_/ / /_/  __/ /
-\____/\____/_/ /_/ /_/ .___/\__,_/\__/\___/_/
-                    /_/
-        Created with Perplexity Computer
-        https://www.perplexity.ai/computer
--->
-<meta name="generator" content="Perplexity Computer">
-<meta name="author" content="Perplexity Computer">
-<meta property="og:see_also" content="https://www.perplexity.ai/computer">
-<link rel="author" href="https://www.perplexity.ai/computer">
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RLS Lab — Supabase RLS Debugger · Early Access</title>
-<meta name="description" content="Your Supabase RLS policy looks correct. It isn't. RLS Lab shows you why your policies are silently failing — before your users find out. Join the founding member waitlist.">
-<meta property="og:title" content="RLS Lab — Supabase RLS Debugger · Early Access">
-<meta property="og:description" content="Join the founding member waitlist. 50% off for life. Limited spots.">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./base.css">
-<link rel="stylesheet" href="./style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RLS Lab — Explain Silent RLS Failures in Supabase</title>
+  <meta name="description" content="RLS Lab is being designed to help Supabase builders understand why queries return nothing: policy bug, JWT/context issue, type mismatch, or missing operation policy. Join the beta waitlist.">
+  <meta property="og:title" content="RLS Lab — Explain Silent RLS Failures in Supabase">
+  <meta property="og:description" content="RLS Lab is being designed to help explain why your RLS query returned nothing — especially once roles, shared resources, and policy surface area start to grow. Join the beta waitlist.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./base.css">
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 
@@ -50,7 +35,7 @@
       <ul class="nav__links">
         <li><a href="#problem" class="nav__link">The problem</a></li>
         <li><a href="#how" class="nav__link">How it works</a></li>
-        <li><a href="#pricing" class="nav__link">Pricing</a></li>
+        <li><a href="#waitlist" class="nav__link">Beta access</a></li>
       </ul>
       <div class="nav__actions">
         <button class="theme-toggle" data-theme-toggle aria-label="Switch to light mode">
@@ -68,15 +53,15 @@
 
     <div class="founding-badge">
       <span class="founding-badge__dot"></span>
-      Early access — 50% off for founding members
+      Beta waitlist open
     </div>
 
     <h1 class="hero__title">
-      Your RLS policy<br>looks correct.<br><em>It isn't.</em>
+      Your query<br>returned nothing.<br><em>Why?</em>
     </h1>
 
     <p class="hero__sub">
-      RLS Lab scans your Supabase project and shows you exactly which policies are silently failing at runtime — and why. No new stack. No migration. Just the answer.
+      RLS Lab is being designed to help Supabase builders understand why a query returned nothing: policy bug, JWT/context issue, type mismatch, or missing operation policy — especially once roles, shared resources, and policy surface area start to grow.
     </p>
 
     <!-- Waitlist form — hero -->
@@ -90,26 +75,26 @@
         aria-label="Your email address"
       >
       <button type="submit" class="btn btn--primary btn--lg">
-        Get Early Access — 50% Off
+        Join the Beta Waitlist
       </button>
     </form>
-    <p class="hero__note">No spam. No card required. &nbsp;·&nbsp; <span id="hero-count" class="spot-counter">50% off first month · founding members only</span></p>
+    <p class="hero__note">No spam. No card required. &nbsp;·&nbsp; <span id="hero-count" class="spot-counter">First access when beta opens</span></p>
 
     <!-- Terminal mock — "this is what your results will look like" -->
     <div class="terminal-wrap">
-      <p class="terminal-caption">What your scan results will look like</p>
+      <p class="terminal-caption">What the explanation could look like</p>
       <div class="terminal">
         <div class="terminal__bar">
           <span class="terminal__dot terminal__dot--red"></span>
           <span class="terminal__dot terminal__dot--yellow"></span>
           <span class="terminal__dot terminal__dot--green"></span>
-          <span class="terminal__title">rlslab — scan results · my-saas-project</span>
+          <span class="terminal__title">rlslab — failure explanation · my-saas-project</span>
         </div>
         <div class="terminal__body">
-<span class="t-prompt">$</span> <span class="t-cmd">rlslab scan --project my-saas</span>
+          <span class="t-prompt">$</span> <span class="t-cmd">rlslab explain --query documents.list --context ssr</span>
 <span class="t-blank"></span>
-<span class="t-comment">Scanning 7 tables across 4 calling contexts...</span>
-<span class="t-comment">Contexts: anon · authenticated · SSR / App Router · Edge Function</span>
+<span class="t-comment">Tracing why this query returned 0 rows across 4 calling contexts...</span>
+<span class="t-comment">Cause classes: policy · JWT/context · type mismatch · missing operation policy</span>
 <span class="t-blank"></span>
 <span class="t-critical">❌ CRITICAL</span>  <span class="t-label">table:</span> <span class="t-key">documents</span>  <span class="t-label">policy:</span> <span class="t-value">"Users can view their documents"</span>
 <span class="t-indent">  <span class="t-label">USING:</span>  <span class="t-value">auth.uid() = owner_id</span></span>
@@ -142,11 +127,11 @@
 <section class="section section--alt" id="problem">
   <div class="container">
     <div class="situation">
-      <p>You wrote the policy. <strong>You tested it in the SQL Editor.</strong> It passed.</p>
-      <p>Then you shipped — and your users couldn't see their data.</p>
+      <p>You shipped a query that should have worked. <strong>It returned nothing.</strong></p>
+      <p>Now you have to figure out whether the break came from the policy, the JWT/session, the request context, a type mismatch, or the operation you forgot to allow.</p>
       <div class="callout callout--critical">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        The SQL Editor runs as <code>postgres</code>. It bypasses every RLS policy you wrote. What you tested is not what your users hit.
+        Silent denials are what make simple RLS mistakes expensive: no useful error, no clear cause, just zero rows and guesswork.
       </div>
     </div>
   </div>
@@ -155,35 +140,50 @@
 <!-- ── SOCIAL PROOF QUOTES ──────────────────────────────────── -->
 <section class="section">
   <div class="container">
-    <p class="section__label" style="text-align:center">This is happening to builders right now</p>
+    <p class="section__label" style="text-align:center">What builders are reporting</p>
     <div class="quotes-grid">
       <div class="quote-card">
-        <p class="quote-card__text">"I spent <strong>2 days debugging</strong> what turned out to be auth.uid() returning NULL in my server-side queries. My policy was fine. My context was wrong."</p>
-        <p class="quote-card__source"><a href="https://www.reddit.com/r/Supabase/comments/1e9zulb/anyone_else_getting_really_frustrated_with_rls/" target="_blank" rel="noopener noreferrer">r/Supabase</a></p>
+        <p class="quote-card__text">Builders report losing time to queries that return no data after RLS is enabled, with no useful error telling them what actually failed.</p>
+        <p class="quote-card__source">
+          <a href="https://www.reddit.com/r/Supabase/comments/1e9zulb/anyone_else_getting_really_frustrated_with_rls/" target="_blank" rel="noopener noreferrer">r/Supabase discussion</a>
+        </p>
       </div>
+
       <div class="quote-card">
-        <p class="quote-card__text">"Ran <strong>prisma migrate deploy</strong> and my entire API stopped working. Every table returned 0 rows. Took a full day to realize Prisma had silently revoked my schema grants."</p>
-        <p class="quote-card__source"><a href="https://github.com/orgs/supabase/discussions" target="_blank" rel="noopener noreferrer">GitHub Discussions</a></p>
+        <p class="quote-card__text">Prisma migrations can break schema grants, leaving Supabase unable to access objects until grants are restored manually.</p>
+        <p class="quote-card__source">
+          <a href="https://github.com/orgs/supabase/discussions/14393" target="_blank" rel="noopener noreferrer">Supabase GitHub Discussion #14393</a>
+        </p>
       </div>
+
       <div class="quote-card">
-        <p class="quote-card__text">"Enabled RLS on my campaigns table and my <strong>Realtime subscriptions stopped firing</strong>. The policy was completely permissive. Didn't matter."</p>
-        <p class="quote-card__source"><a href="https://www.reddit.com/r/Supabase/" target="_blank" rel="noopener noreferrer">r/Supabase</a></p>
+        <p class="quote-card__text">Some builders report Realtime updates working normally until RLS is enabled, even when the publication and SELECT policy look correct.</p>
+        <p class="quote-card__source">
+          <a href="https://www.reddit.com/r/Supabase/comments/1k50dbu/supabase_realtime_updates_fail_only_when_rls_is/" target="_blank" rel="noopener noreferrer">r/Supabase Realtime thread</a>
+        </p>
       </div>
+
       <div class="quote-card">
-        <p class="quote-card__text">"My UPDATE policy looked right. <strong>The UI said success. The row never changed.</strong> Turns out I had a USING clause where I needed WITH CHECK. Postgres said nothing."</p>
-        <p class="quote-card__source"><a href="https://www.reddit.com/r/Supabase/comments/1fzja81/setting_up_rls_policies_is_super_frustrating_in/" target="_blank" rel="noopener noreferrer">r/Supabase, 29 upvotes</a></p>
+        <p class="quote-card__text">Builders also report that writing policies in the UI is frustrating enough that they fall back to raw SQL in the editor.</p>
+        <p class="quote-card__source">
+          <a href="https://www.reddit.com/r/Supabase/comments/1fzja81/setting_up_rls_policies_is_super_frustrating_in/" target="_blank" rel="noopener noreferrer">r/Supabase UI frustration thread</a>
+        </p>
       </div>
     </div>
-    <p style="text-align:center;margin-top:var(--space-8);font-size:var(--text-sm);color:var(--color-text-faint);font-family:var(--font-display);">These are the 4 most common RLS failure modes. Each invisible to every existing tool.</p>
+    <p style="text-align:center;margin-top:var(--space-8);font-size:var(--text-sm);color:var(--color-text-faint);font-family:var(--font-display);">
+      Four real failure patterns and DX complaints from Supabase builders.
+    </p>
   </div>
 </section>
 
 <!-- ── FAILURE TABLE ────────────────────────────────────────── -->
 <section class="section section--dark-alt">
   <div class="container">
-    <p class="section__label">What RLS Lab detects</p>
-    <h2 class="section__title">8 silent failures.<br>Zero existing tools catch them.</h2>
-    <p class="section__sub" style="margin-bottom:var(--space-10)">The SQL Editor bypasses all of these. It runs as <code style="font-family:var(--font-display);background:var(--color-surface-offset);padding:1px 6px;border-radius:4px;font-size:0.875em;">postgres</code>. You test. It passes. You ship. It breaks.</p>
+    <p class="section__label">Failure patterns RLS Lab is being designed to detect</p>
+<h2 class="section__title">8 RLS failure patterns.<br>Easy to miss. Expensive to debug.</h2>
+<p class="section__sub" style="margin-bottom:var(--space-10)">
+  Some failures come from RLS being evaluated in the real request context instead of the SQL Editor. Others come from grants, Realtime behavior, or policy design mistakes that are hard to isolate once your setup grows.
+</p>
 
     <div style="overflow-x:auto;border-radius:var(--radius-xl);border:1px solid var(--color-border);">
       <table class="failure-table">
@@ -244,108 +244,25 @@
 <!-- ── HOW IT WORKS ─────────────────────────────────────────── -->
 <section class="section" id="how">
   <div class="container">
-    <p class="section__label">How RLS Lab works</p>
-    <h2 class="section__title" style="margin-bottom:var(--space-10)">Same stack. No migration.<br>No new service.</h2>
-    <div class="steps">
-      <div class="step">
-        <h3>Connect</h3>
-        <p>OAuth to your Supabase project. Read-only. Nothing in your project changes — no policies, no data, no configuration.</p>
-      </div>
-      <div class="step">
-        <h3>Scan</h3>
-        <p>Your policies are evaluated against four real calling contexts: anonymous, authenticated, server-side (SSR), and Edge Function. Not a superuser. Your actual users' perspective.</p>
-      </div>
-      <div class="step">
-        <h3>See the failure</h3>
-        <p>Exact failure mode. Exact policy. Exact context. In plain language — not a Postgres error code you have to decode on Stack Overflow.</p>
-      </div>
-      <div class="step">
-        <h3>Get the fix</h3>
-        <p>Context-aware SQL using your actual column names and auth provider. With an explanation of what was wrong and why the fix works. Not a template.</p>
-      </div>
-    </div>
+    <h2 class="section__title" style="margin-bottom:var(--space-10)">How RLS Lab is being designed</h2>
+<div class="steps">
+  <div class="step">
+    <h3>Connect</h3>
+    <p>The goal is a read-only connection to your Supabase project, without changing policies, data, or configuration.</p>
   </div>
-</section>
-
-<!-- ── PRICING ──────────────────────────────────────────────── -->
-<section class="section section--alt" id="pricing">
-  <div class="container">
-    <p class="section__label" style="text-align:center">Founding member pricing</p>
-    <h2 class="section__title" style="text-align:center;margin-bottom:var(--space-4)">Save $24.50 on your first month.</h2>
-    <p class="section__sub" style="text-align:center;margin-inline:auto;margin-bottom:var(--space-10)">Join now as a founding member — 50% off your first month. Full price after that. Available to the first group of signups only.</p>
-
-    <!-- Free tier callout -->
-    <div class="free-tier-callout">
-      <div class="free-tier-callout__left">
-        <span class="free-tier-callout__label">Free — Diagnose</span>
-        <p class="free-tier-callout__desc">Connect your project. See exactly which policies are broken and why. No card required. Scan up to 3 tables.</p>
-      </div>
-      <a href="#waitlist" class="btn btn--ghost btn--sm">Get early access →</a>
-    </div>
-
-    <div class="pricing-grid" style="margin-top:var(--space-6)">
-
-      <!-- Fix — featured -->
-      <div class="pricing-card pricing-card--featured">
-        <div class="pricing-badge">Founding Member</div>
-        <p class="pricing-card__tier">Fix</p>
-        <div class="pricing-card__price">
-          <span class="price-strike">$49</span>&nbsp;$24.50<span class="price-suffix">/mo</span>
-        </div>
-        <div class="pricing-card__alt-price">then $29/mo · save $24.50</div>
-        <p class="pricing-card__desc">Unlimited scans + context-aware fix suggestions for your exact schema. Handles Clerk, SSR NULL, Prisma migration grants, USING/WITH CHECK errors. Pre-ship checklist included.</p>
-        <div class="pricing-card__guarantee">
-          If our fix doesn't work, we debug it manually within 48hr — or your next month is free.
-        </div>
-        <ul class="pricing-card__features">
-          <li class="pricing-card__feature">Unlimited table scans</li>
-          <li class="pricing-card__feature">8 silent failure detections</li>
-          <li class="pricing-card__feature">Context-aware fix suggestions</li>
-          <li class="pricing-card__feature">Clerk + Supabase JWT patterns</li>
-          <li class="pricing-card__feature">Prisma migration GRANT guard</li>
-          <li class="pricing-card__feature">Realtime subscription validator</li>
-          <li class="pricing-card__feature">Pre-ship policy checklist</li>
-          <li class="pricing-card__feature">48-hour manual debug guarantee</li>
-        </ul>
-        <a href="#waitlist" class="btn btn--primary" style="width:100%;justify-content:center">Claim Founding Spot →</a>
-      </div>
-
-      <!-- Trust -->
-      <div class="pricing-card">
-        <p class="pricing-card__tier">Trust</p>
-        <div class="pricing-card__price">
-          <span class="price-strike">$99</span>&nbsp;$39.50<span class="price-suffix">/mo</span>
-        </div>
-        <div class="pricing-card__alt-price">then $79/mo · or $599 one-time · save $59.50</div>
-        <p class="pricing-card__desc">Everything in Fix + auto-generated pgTAP tests, GitHub Action CI integration, Realtime policy validator, performance audit, policy regression alerts.</p>
-        <div class="pricing-card__guarantee">
-          If a migration passes our CI check and breaks production, we fix the test suite and refund the month.
-        </div>
-        <ul class="pricing-card__features">
-          <li class="pricing-card__feature">Everything in Fix</li>
-          <li class="pricing-card__feature">Auto-generated pgTAP test suite</li>
-          <li class="pricing-card__feature">GitHub Action CI integration</li>
-          <li class="pricing-card__feature">Policy regression alerts on deploy</li>
-          <li class="pricing-card__feature">Performance audit (O(N×M) detection)</li>
-          <li class="pricing-card__feature">Realtime policy validator</li>
-          <li class="pricing-card__feature">One additional team seat</li>
-        </ul>
-        <a href="#waitlist" class="btn btn--ghost" style="width:100%;justify-content:center">Claim Founding Spot →</a>
-      </div>
-
-    </div>
-
-    <!-- Launch Accelerator -->
-    <div class="audit-addon">
-      <div>
-        <p class="audit-addon__tier">Launch Accelerator — one-time</p>
-        <p class="audit-addon__price">$149 <span>one-time · founding price $74</span></p>
-        <p class="audit-addon__desc">Submit your project. Get a complete, correct policy set + pgTAP tests + Loom walkthrough of every failure found — within 24 hours. <strong>Outcome guaranteed:</strong> if delivered policies fail in production for any covered failure mode, full re-audit free.</p>
-      </div>
-      <a href="#waitlist" class="btn btn--ghost" style="white-space:nowrap">Claim Spot →</a>
-    </div>
-
+  <div class="step">
+    <h3>Scan</h3>
+    <p>We’re designing RLS Lab to evaluate policies against the calling contexts that usually create the most confusion: anonymous, authenticated, server-side, and Edge Function flows.</p>
   </div>
+  <div class="step">
+    <h3>See the failure</h3>
+    <p>The goal is to show the likely failure class, affected policy surface, and request context in plain language instead of forcing you to reverse-engineer it from symptoms.</p>
+  </div>
+  <div class="step">
+    <h3>Suggest the next fix</h3>
+    <p>Where possible, we want to suggest the next thing to check or change based on your schema and auth setup rather than giving generic RLS advice.</p>
+  </div>
+</div>
 </section>
 
 <!-- ── WAITLIST SECTION ──────────────────────────────────────── -->
@@ -356,10 +273,10 @@
       <div class="waitlist-card__header">
         <span class="founding-badge">
           <span class="founding-badge__dot"></span>
-          Early Access Open
+          Beta Access
         </span>
-        <h2 class="waitlist-card__title">Join the founding member waitlist</h2>
-        <p class="waitlist-card__sub">50% off your first month. First access when we launch. Direct line to the builder — your use case shapes what we build first.</p>
+        <h2 class="waitlist-card__title">Join the beta waitlist</h2>
+        <p class="waitlist-card__sub">Built for Supabase builders dealing with silent denials, context ambiguity, and growing RLS policy surface area. Join the waitlist to get first access when beta opens and help shape what we build first.</p>
       </div>
 
       <form class="waitlist-form" id="waitlist-form" onsubmit="handleSubmit(event, 'waitlist')">
@@ -373,7 +290,7 @@
             aria-label="Your work email"
           >
           <button type="submit" class="btn btn--primary btn--lg">
-            Claim 50% Off First Month
+            Join the Beta Waitlist
           </button>
         </div>
         <p class="waitlist-form__note">No spam. No credit card. Unsubscribe anytime.</p>
@@ -382,19 +299,19 @@
       <div class="waitlist-card__proof">
         <div class="proof-item">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-          50% off your first month on Fix or Trust — founding members only
+          First access when beta opens
         </div>
         <div class="proof-item">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-          First access when beta launches
+          Built for RLS failures that return nothing and give you no clear cause
         </div>
         <div class="proof-item">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-          Direct input into what gets built first
+          Especially useful once roles, shared resources, and policy surface area start to grow
         </div>
         <div class="proof-item">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-          48-hour manual debug guarantee on day one
+          Direct input into what we build first
         </div>
       </div>
     </div>
@@ -412,39 +329,28 @@
 
       <details>
         <summary>Is this live yet?</summary>
-        <div class="faq-answer">Not yet — this is the pre-launch waitlist. We're building RLS Lab now and opening beta to founding members first. Joining the waitlist locks in your 50% discount and gets you first access when we launch.</div>
-      </details>
-
-      <details>
-        <summary>Why should I trust that this will actually get built?</summary>
-        <div class="faq-answer">Fair question. A few things: the founder has personally hit every failure mode documented on this page while building Supabase apps. The terminal output above isn't a mockup of a dream product — it's the exact output format we're building toward. The founding member discount is a credibility bet: if we don't ship, you paid nothing. No card required to join.</div>
-      </details>
-
-      <details>
-        <summary>When does the 50% off expire?</summary>
-        <div class="faq-answer">It doesn't. Founding member pricing is locked to your account permanently. Even as we add features and raise the standard price, your rate stays at the founding price forever — as long as you maintain your subscription.</div>
+        <div class="faq-answer">Not yet — this is the pre-launch beta waitlist. We're building RLS Lab now. Joining the waitlist gets you first access when beta opens.</div>
       </details>
 
       <details>
         <summary>How is this different from the Supabase Security Advisor?</summary>
-        <div class="faq-answer">The Security Advisor tells you which tables are <em>missing</em> RLS. It cannot tell you why a policy you've already written is silently failing at runtime — returning empty results, causing HTTP 500s, or blocking Realtime subscriptions. Those are different problems. RLS Lab solves the second one.</div>
+        <div class="faq-answer">Supabase Security Advisor helps catch important configuration and policy issues, including some RLS problems. RLS Lab is being designed for a different job: helping explain why a query still fails or returns nothing in a real request context, especially when the problem involves JWT/session context, SSR behavior, grants, Realtime behavior, or policy interactions that are hard to isolate from symptoms alone.</div>
       </details>
 
       <details>
         <summary>Why not just ask ChatGPT to fix my RLS?</summary>
-        <div class="faq-answer">You've probably already tried this. The AI gave you SQL that looked correct — because it is syntactically correct. But it fails at runtime because AI doesn't know your calling context: whether you're using the anon client in a server component, whether your Prisma migration already wiped your grants, whether your Clerk users aren't in <code>auth.users</code>. AI without context generates the right-looking wrong answer. RLS Lab reads your actual schema and calling context — and finds the failure the AI can't see.</div>
+        <div class="faq-answer">You've probably already tried this. The AI gave you SQL that looked correct — because it is syntactically correct. But it fails at runtime because AI doesn't know your calling context: whether you're using the anon client in a server component, whether your Prisma migration already wiped your grants, whether your Clerk users aren't in <code>auth.users</code>. AI without context generates the right-looking wrong answer. RLS Lab is being designed to reason from your actual schema and calling context instead of guessing from symptoms alone.</div>
       </details>
 
       <details>
         <summary>Will this work with Clerk + Supabase?</summary>
-        <div class="faq-answer">Yes. Clerk + Supabase is a specific failure class we handle explicitly. The core issue — <code>auth.uid()</code> returning NULL because Clerk users don't exist in <code>auth.users</code> — is one of the most common patterns we detect. We generate the correct <code>current_setting('request.jwt.claims')::json->>'sub'</code> replacement for every policy that needs it.</div>
+        <div class="faq-answer">Clerk + Supabase is one of the failure patterns we care about most. A common issue is relying on <code>auth.uid()</code> in setups where the expected Supabase auth context is not actually present. That kind of mismatch is exactly the sort of ambiguity RLS Lab is being designed to help explain.</div>
       </details>
 
       <details>
-        <summary>What if my schema is too complex for automated fixes?</summary>
-        <div class="faq-answer">The 48-hour manual guarantee covers this. If the automated fix doesn't resolve your specific failure, a human debugs it and delivers the corrected policy within 48 hours. If we can't fix it, your next month is free. Complex schemas are the exact use case this was built for — the patterns that break most often are the multi-tenant, org-scoped, role-based ones, not the simple ones.</div>
+        <summary>What if my schema is too complex for this?</summary>
+        <div class="faq-answer">Complex schemas are exactly where silent denials become hardest to reason about. That’s one of the main cases RLS Lab is being designed for. Joining the beta waitlist gives you early access and a chance to shape how we handle real-world policy complexity.</div>
       </details>
-
     </div>
   </div>
 </section>
@@ -452,9 +358,8 @@
 <!-- ── FOOTER CTA ────────────────────────────────────────────── -->
 <section class="footer-cta">
   <div class="container container--narrow">
-    <h2 class="section__title">Stop losing days to<br>RLS debugging.</h2>
-    <p class="section__sub" style="margin-inline:auto;margin-bottom:var(--space-8);">Join the waitlist. Lock in 50% off your first month. First access when we launch.</p>
-    <a href="#waitlist" class="btn btn--primary btn--lg">Claim Your Founding Spot →</a>
+    <p class="section__sub" style="margin-inline:auto;margin-bottom:var(--space-8);">Join the beta waitlist. Get first access when beta opens.</p>
+    <a href="#waitlist" class="btn btn--primary btn--lg">Join the Beta Waitlist</a>
   </div>
 </section>
 
@@ -465,10 +370,7 @@
       <p class="footer__copy">
         &copy; 2026 RLS Lab &nbsp;·&nbsp;
         <a href="mailto:hello@rlslab.com">hello@rlslab.com</a>
-      </p>
-      <p class="footer__copy">
-        <a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer">Created with Perplexity Computer</a>
-      </p>
+      </p>  
     </div>
   </div>
 </footer>
@@ -527,7 +429,7 @@ function showSuccess(form, email, source) {
     </div>
     <div>
       <p class="success-msg__title">You're on the list.</p>
-      <p class="success-msg__sub">We'll email <strong>${email}</strong> when beta opens. Your 50% founding discount is reserved.</p>
+      <p class="success-msg__sub">We'll email <strong>${email}</strong> when beta opens.</p>
     </div>
   `;
 

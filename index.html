@@ -436,7 +436,7 @@
         throw new Error(data.error || 'Signup failed');
       }
 
-      showSuccess(form, email);
+      showSuccess(form, email, data.message);
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Load failed';
       showError(form, message);
@@ -444,32 +444,41 @@
     }
   }
 
-  function showSuccess(form, email) {
-    const existingError = form.parentElement.querySelector('.error-msg');
-    if (existingError) existingError.remove();
+  function showSuccess(form, email, message) {
+  const existingError = form.parentElement.querySelector('.error-msg');
+  if (existingError) existingError.remove();
 
-    const msg = document.createElement('div');
-    msg.className = 'success-msg';
-    msg.innerHTML = `
-      <div class="success-msg__icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <polyline points="20 6 9 17 4 12"/>
-        </svg>
-      </div>
-      <div>
-        <p class="success-msg__title">You're on the list.</p>
-        <p class="success-msg__sub">We'll email <strong>${email}</strong> when beta opens.</p>
-      </div>
-    `;
+  const existingSuccess = form.parentElement.querySelector('.success-msg');
+  if (existingSuccess) existingSuccess.remove();
 
-    form.style.display = 'none';
-    form.insertAdjacentElement('afterend', msg);
+  const isDuplicate = message === 'Already on the list';
+  const title = isDuplicate ? 'Already on the list.' : "You're on the list.";
+  const sub = isDuplicate
+    ? `<strong>${email}</strong> is already registered. We'll email you when beta opens.`
+    : `We'll email <strong>${email}</strong> when beta opens.`;
 
-    document.querySelectorAll('.spot-counter').forEach((el) => {
-      el.textContent = 'Spot reserved ✓';
-      el.style.color = 'var(--color-primary)';
-    });
-  }
+  const msg = document.createElement('div');
+  msg.className = 'success-msg';
+  msg.innerHTML = `
+    <div class="success-msg__icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+    </div>
+    <div>
+      <p class="success-msg__title">${title}</p>
+      <p class="success-msg__sub">${sub}</p>
+    </div>
+  `;
+
+  form.style.display = 'none';
+  form.insertAdjacentElement('afterend', msg);
+
+  document.querySelectorAll('.spot-counter').forEach((el) => {
+    el.textContent = 'Spot reserved ✓';
+    el.style.color = 'var(--color-primary)';
+  });
+}
 
   function showError(form, message) {
     const existingError = form.parentElement.querySelector('.error-msg');
